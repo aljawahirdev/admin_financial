@@ -508,7 +508,9 @@ function deleteAdminUser(index) {
 }
 
 
+
 function saveRevenue() {
+  if (!isSuper()) { setMsg('revMsg', 'إضافة أو تعديل الإيراد متاحة للأدمن فقط', 'error'); return; }
   const data = { id: editingRevenueId, title: revTitle.value, date: revDate.value, amount: revAmount.value, method: revMethod.value, source: revSource.value, transferNo: revTransfer.value };
   if (!data.title || !data.date || !data.amount) return setMsg('revMsg', 'يرجى ملء تعيين الإيراد، التاريخ، والمبلغ', 'error');
   setStatus(editingRevenueId ? 'جاري تعديل الإيراد...' : 'جاري حفظ الإيراد...');
@@ -522,6 +524,7 @@ function saveRevenue() {
 }
 
 function saveExpense() {
+  if (!isSuper()) { setMsg('expMsg', 'إضافة أو تعديل النفقة متاحة للأدمن فقط', 'error'); return; }
   const data = { id: editingExpenseId, title: expTitle.value, date: expDate.value, amount: expAmount.value, method: expMethod.value, category: expCategory.value, transferNo: expTransfer.value };
   if (!data.title || !data.date || !data.amount) return setMsg('expMsg', 'يرجى ملء تعيين النفقة، التاريخ، والمبلغ', 'error');
   setStatus(editingExpenseId ? 'جاري تعديل النفقة...' : 'جاري حفظ النفقة...');
